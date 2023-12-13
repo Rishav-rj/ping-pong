@@ -13,7 +13,7 @@ let y = 50
 let lastTime;
 let position = 50
 let start = false;
-
+maxScore.innerHTML = localStorage.getItem("max_Score")
 
 // Helper Function start
 function setX(value){
@@ -54,10 +54,10 @@ function reset(){
   position = 50
   rodPosition(50)
   currScore.innerHTML = 0
-  if(maxScore.innerHTML == 0){
+  if(maxScore.innerHTML == 0 || maxScore.innerHTML == null){
     localStorage.setItem("max_Score", "0")
   }
-  maxScore.innerHTML = localStorage.getItem("max_Score");
+
   direction = {x: 0}
   while (Math.abs(direction.x)<= 0.2 || Math.abs(direction.x)>= 0.9){
     const heading = randomNumberBetween(0, 2 * Math.PI);
