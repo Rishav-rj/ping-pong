@@ -5,7 +5,7 @@ let rodRight = document.querySelector("#rod-right");
 let currScore = document.querySelector("#currScore span");
 let maxScore = document.querySelector("#maxScore span");
 let InitialVelocity = 0.035;
-let velocityIncr = 0.0000005;
+let velocityIncr = 0.000001;
 let direction;
 let velocity;
 let x = 50
@@ -14,6 +14,7 @@ let lastTime;
 let position = 50
 let start = false;
 maxScore.innerHTML = localStorage.getItem("max_Score")
+// localStorage.clear()
 
 // Helper Function start
 function setX(value){
@@ -114,24 +115,36 @@ function update(time){
 // Rods movement & game start function
 function MoveRod(e){
   let key = e.key
-  if(key == "w"){
-    if (position >= 11){
-      position -= 3
-      rodLeft.style.setProperty("--position", position)
-      rodRight.style.setProperty("--position", position)
-    }
-  }
-  if(key == "s"){
-    if(position < 88){
-      position += 3
-      rodLeft.style.setProperty("--position", position)
-      rodRight.style.setProperty("--position", position)
-    }
-  }
+  // if(key == "w"){
+  //   if (position >= 11){
+  //     position -= 3
+  //     rodLeft.style.setProperty("--position", position)
+  //     rodRight.style.setProperty("--position", position)
+  //   }
+  // }
+  // if(key == "s"){
+  //   if(position < 88){
+  //     position += 3
+  //     rodLeft.style.setProperty("--position", position)
+  //     rodRight.style.setProperty("--position", position)
+  //   }
+  // }
   if(key == "Enter"){
     document.getElementById("startInfo").style.display = "none"
     start = true
   }
+}
+
+
+function MouseMove(e){
+  let position = (e.y/window.innerHeight)*100
+  // console.log(window.innerHeight);
+  if(position >= 9 && position <=91 && start== true){
+    console.log(position);
+    rodLeft.style.setProperty("--position", position)
+    rodRight.style.setProperty("--position", position)
+  }
+
 }
 
 // Game Lose funtion
@@ -157,6 +170,7 @@ function isCollision(){
 // Onload Funtion
 window.onload = ()=>{
   reset()
+  document.addEventListener("mousemove", MouseMove)
   document.addEventListener("keydown", MoveRod)
   window.requestAnimationFrame(update)
 }
