@@ -4,6 +4,7 @@ let rodLeft = document.querySelector("#rod-left");
 let rodRight = document.querySelector("#rod-right");
 let currScore = document.querySelector("#currScore span");
 let maxScore = document.querySelector("#maxScore span");
+let startGame = document.querySelector("#start-game");
 let InitialVelocity = 0.035;
 let velocityIncr = 0.000001;
 let direction;
@@ -134,6 +135,11 @@ function MoveRod(e){
     start = true
   }
 }
+
+startGame.addEventListener('click', ()=>{
+  document.getElementById("startInfo").style.display = "none"
+    start = true
+})
 
 
 function MouseMove(e){
